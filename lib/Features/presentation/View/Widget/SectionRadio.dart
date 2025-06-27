@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intern/Features/presentation/View/Widget/buildRadioOption.dart';
 
-class RadioSection extends StatefulWidget {
+class RadioSection extends StatelessWidget {
   const RadioSection({super.key});
-
-  @override
-  State<RadioSection> createState() => _RadioSectionState();
-}
-
-class _RadioSectionState extends State<RadioSection> {
-  String selectedGender = 'Male';
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +14,10 @@ class _RadioSectionState extends State<RadioSection> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [RadioOption(value: "Male"), RadioOption(value: "Female")],
+        children: [
+          RadioOption(value: "Male", groupValue: "Male"),
+          RadioOption(value: "Female", groupValue: "Male"),
+        ],
       ),
     );
   }

@@ -9,14 +9,15 @@ import 'package:intern/utilites/FirebaseService.dart';
 
 class ProfileController extends GetxController {
   final user = UserModel().obs;
-final ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   final isLoading = true.obs;
   final isUploadingImage = false.obs;
 
+
   @override
-  void onInit() {
-    loadUserData(); 
-    super.onInit(); 
+  void onReady() {  
+    super.onReady();
+    loadUserData();
   }
 
   Future<void> loadUserData() async {
@@ -53,17 +54,18 @@ final ImagePicker _picker = ImagePicker();
   }) async {
     try {
       isUploadingImage(true);
-      final filename = 'profile_${user.value.id ?? 'user'}_${DateTime.now().millisecondsSinceEpoch}.jpg';
-      
+      final filename =
+          'profile_${user.value.id ?? 'user'}_${DateTime.now().millisecondsSinceEpoch}.jpg';
+
       final imageUrl = await FirebaseService.uploadProfileImage(
         file: file,
         webImageBytes: webImageBytes,
         filename: filename,
       );
-      
+
       if (imageUrl != null) {
         final updatedUser = user.value.copyWith(imageUrl: imageUrl);
-         updateUser(updatedUser);
+        updateUser(updatedUser);
         return imageUrl;
       }
       return null;
@@ -75,7 +77,7 @@ final ImagePicker _picker = ImagePicker();
     }
   }
 
-   Future<void> pickImage() async {
+  Future<void> pickImage() async {
     try {
       final picked = await _picker.pickImage(source: ImageSource.gallery);
 
