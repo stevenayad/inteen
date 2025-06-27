@@ -1,17 +1,27 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intern/Features/presentation/Controller/profileController.dart';
 
 class CircleAvatarwithCamera extends StatelessWidget {
-  const CircleAvatarwithCamera ({super.key});
+  const CircleAvatarwithCamera({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    final controller = Get.find<ProfileController>();
+
+    return GestureDetector(
+      onTap: () => controller.pickImage(),
+      child: Obx(
+        () => Stack(
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-              ),
+              backgroundImage:
+                  controller.user.value.imageUrl != null
+                      ? NetworkImage(controller.user.value.imageUrl!)
+                      : const NetworkImage(
+                            'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                          )
+                          as ImageProvider,
               radius: 50,
             ),
             Positioned(
@@ -28,6 +38,8 @@ class CircleAvatarwithCamera extends StatelessWidget {
               ),
             ),
           ],
-        );
+        ),
+      ),
+    );
   }
 }

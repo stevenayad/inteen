@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: appRoutes,
       initialRoute: '/profile',
-       initialBinding: ProfileBinding(), 
+      initialBinding: ProfileBinding(),
     );
   }
 }
