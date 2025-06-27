@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'dart:io' as io show File;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,6 +8,18 @@ import 'package:intern/Features/data/Model/userModel.dart';
 
 class FirebaseService {
   static final _db = FirebaseFirestore.instance;
+
+
+static  Future<void> initializeFirebase() async {
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyCjBZVBbyNTey_R4_F_FUOoO0nUo8kNwmk",
+      appId: "1:1033775597248:android:94add6c551c3784a208f25",
+      messagingSenderId: "1033775597248",
+      projectId: "shopping-fd71e",
+    ),
+  );
+}
 
   static Future<UserModel> getUserData() async {
     try {

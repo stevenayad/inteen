@@ -3,19 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:intern/Features/presentation/Binding/ProfileBinding.dart';
+import 'package:intern/utilites/FirebaseService.dart';
 import 'package:intern/utilites/approutes.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyCjBZVBbyNTey_R4_F_FUOoO0nUo8kNwmk",
-      appId: "1:1033775597248:android:94add6c551c3784a208f25",
-      messagingSenderId: "1033775597248",
-      projectId: "shopping-fd71e",
-    ),
-  );
-
+  await FirebaseService.initializeFirebase();
   runApp(const MyApp());
 }
 

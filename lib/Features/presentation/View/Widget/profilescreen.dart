@@ -5,12 +5,17 @@ import 'package:intern/Features/presentation/View/Widget/featureapp.dart';
 import 'package:intern/Features/presentation/View/Widget/personsection.dart';
 import 'package:intern/utilites/appconst.dart';
 
-class Profilescreen extends StatelessWidget {
+class Profilescreen extends StatefulWidget {
   Profilescreen({super.key});
 
-  final controller = Get.find<ProfileController>();
+  @override
+  State<Profilescreen> createState() => _ProfilescreenState();
+}
+
+class _ProfilescreenState extends State<Profilescreen> {
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ProfileController>();
     return Obx(() {
       if (controller.isLoading.value) {
         return Center(child: CircularProgressIndicator());
