@@ -30,8 +30,7 @@ class FirebaseService {
     }
   }
 
-
- //this function not work Because not free (Paid Services)
+  //this function not work Because not free (Paid Services)
   static Future<String> uploadProfileImage({
     io.File? file,
     Uint8List? webImageBytes,
@@ -51,7 +50,6 @@ class FirebaseService {
           SettableMetadata(contentType: 'image/jpeg'),
         );
       } else {
-      
         if (file == null) {
           throw Exception('file is null for mobile upload');
         }

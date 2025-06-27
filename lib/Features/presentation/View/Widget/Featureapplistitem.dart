@@ -3,7 +3,11 @@ import 'package:intern/Features/presentation/View/Widget/IconCricle.dart';
 import 'package:intern/utilites/appconst.dart' show AppConstants;
 
 class Featureapplistitem extends StatelessWidget {
-  const Featureapplistitem({super.key, required this.icon, required this.string});
+  const Featureapplistitem({
+    super.key,
+    required this.icon,
+    required this.string,
+  });
 
   final IconData icon;
   final String string;
@@ -11,7 +15,7 @@ class Featureapplistitem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconCircle(icon: Icons.settings),
+        IconCircle(icon: icon),
         SizedBox(width: 10),
         Text(string, style: AppConstants.normalText),
       ],
