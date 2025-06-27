@@ -1,13 +1,15 @@
 import 'dart:io' as io;
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intern/Features/data/Model/userModel.dart';
 import 'package:intern/utilites/FirebaseService.dart';
 
 class ProfileController extends GetxController {
   final user = UserModel().obs;
-
+final ImagePicker _picker = ImagePicker();
   final isLoading = true.obs;
   final isUploadingImage = false.obs;
 
@@ -70,6 +72,26 @@ class ProfileController extends GetxController {
       return null;
     } finally {
       isUploadingImage(false);
+    }
+  }
+
+   Future<void> pickImage() async {
+    try {
+      final picked = await _picker.pickImage(source: ImageSource.gallery);
+
+      if (picked == null) return;
+
+      final filename = picked.name;
+
+      if (kIsWeb) {
+        final bytes = await picked.readAsBytes();
+        await uploadProfileImage(webImageBytes: bytes, filename: filename);
+      } else {
+        final file = io.File(picked.path);
+        await uploadProfileImage(file: file, filename: filename);
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Image pick failed: ${e.toString()}');
     }
   }
 }
